@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="mastermime.cretecstudios.com.mastermime.ActivityWords">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_background"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Palavras"
+                    android:theme="@style/MyLabel" />
+
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/bt_words_add"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:drawableLeft="@drawable/add_icon"
+                android:gravity="center_horizontal|center_vertical"
+                android:textSize="50dp"
+                android:theme="@style/MyButton" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/words_search_text"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_weight="1"
+                android:hint="Digite sua pesquisa..."
+                android:inputType="textPersonName"
+                android:paddingRight="15dp"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textColorHint="#eee"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/words_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="450 palavras encontradas"
+                android:textSize="16dp"
+                android:theme="@style/MyLabel" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <ListView
+                android:id="@+id/words_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="#fff"
+                android:dividerHeight="1sp" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>

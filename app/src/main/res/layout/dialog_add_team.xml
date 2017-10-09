@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="mastermime.cretecstudios.com.mastermime.ActivityWords">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/main_background"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nome da Equipe"
+            android:textColor="#fff"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edt_add_team"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite o Nome da Equipe"
+            android:inputType="textPersonName"
+            android:paddingLeft="15dp"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="18dp" />
+
+
+        <TextView
+            android:id="@+id/texasdsatView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Selecione o Símbolo"
+            android:textColor="#fff"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="2dp">
+
+            <ImageButton
+                android:id="@+id/imageButton1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="2dp"
+                android:background="@color/colorPrimaryDark"
+                android:padding="10dp"
+                app:srcCompat="@drawable/team1" />
+
+            <ImageButton
+                android:id="@+id/imageBasdutton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="2dp"
+                android:background="@color/colorPrimaryDark"
+                android:padding="10dp"
+                app:srcCompat="@drawable/team2" />
+
+            <ImageButton
+                android:id="@+id/imageBuasdtton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="2dp"
+                android:background="@color/colorPrimaryDark"
+                android:padding="10dp"
+                app:srcCompat="@drawable/team3" />
+
+            <ImageButton
+                android:id="@+id/imageBuasdaaatton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="2dp"
+                android:background="@color/colorPrimaryDark"
+                android:padding="10dp"
+                app:srcCompat="@drawable/team4" />
+ik
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="2dp">
+
+            <ImageButton
+                android:id="@+id/imageButtoasdn1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="2dp"
+                android:background="@color/colorPrimaryDark"
+                android:padding="10dp"
+                app:srcCompat="@drawable/team5" />
+
+            <ImageButton
+                android:id="@+id/imageBasdasdutton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="2dp"
+                android:background="@color/colorPrimaryDark"
+                android:padding="10dp"
+                app:srcCompat="@drawable/team6" />
+
+            <ImageButton
+                android:id="@+id/imasdageBuasdtton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="2dp"
+                android:background="@color/colorPrimaryDark"
+                android:padding="10dp"
+                app:srcCompat="@drawable/team7" />
+
+            <ImageButton
+                android:id="@+id/imageBaaauasdtton"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_margin="2dp"
+                android:background="@color/colorPrimaryDark"
+                android:padding="10dp"
+                app:srcCompat="@drawable/team8" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+
+            <Button
+                android:id="@+id/add_team_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/cancel_icon"
+                android:theme="@style/MyButton" />
+
+            <Button
+                android:id="@+id/add_team_ok"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/ok_icon"
+                android:theme="@style/MyButton" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</android.support.design.widget.CoordinatorLayout>
