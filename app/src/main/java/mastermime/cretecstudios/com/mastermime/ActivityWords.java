@@ -236,8 +236,6 @@ public class ActivityWords extends AppCompatActivity {
 
     //Método que insere uma palavra na Base de Dados
     public void insertWord(String word, String tip, String category) {
-        HelperDataBase hdb = new HelperDataBase(getApplicationContext());
-        SQLiteDatabase db = hdb.getWritableDatabase();
 
         ObjectWord word_object = new ObjectWord();
 
@@ -245,11 +243,8 @@ public class ActivityWords extends AppCompatActivity {
         word_object.setTip(tip);
         word_object.setCategory(category);
 
-        String sql = word_object.insertWord();
-
-        db.execSQL(sql);
-
-        db.close();
+        DaoSession daoSession = ((App) getApplication()).getDaoSession();
+        daoSession.getObjectWordDao().insert(word_object);
 
         fillWordsList();
 
@@ -259,18 +254,12 @@ public class ActivityWords extends AppCompatActivity {
     }
 
     //Método que deleta uma palavra na Base de Dados
-    public void deleteWord(int id) {
-        HelperDataBase hdb = new HelperDataBase(getApplicationContext());
-        SQLiteDatabase db = hdb.getWritableDatabase();
+    public void deleteWord(long id) {
 
-        ObjectWord word_object = new ObjectWord();
-        word_object.setId(id);
+        DaoSession daoSession = ((App) getApplication()).getDaoSession();
+        ObjectWordDao wordDao = daoSession.getObjectWordDao();
 
-        String sql = word_object.deleteWord();
-
-        db.execSQL(sql);
-
-        db.close();
+        wordDao.deleteByKey(id);
 
         fillWordsList();
 

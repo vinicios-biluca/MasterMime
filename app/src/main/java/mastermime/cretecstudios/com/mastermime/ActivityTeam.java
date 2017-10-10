@@ -3,20 +3,17 @@ package mastermime.cretecstudios.com.mastermime;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import org.greenrobot.greendao.query.Query;
 
 public class ActivityTeam extends AppCompatActivity {
 
@@ -124,19 +121,13 @@ public class ActivityTeam extends AppCompatActivity {
     }
 
     public void insertTeam(String team_name){
-        HelperDataBase hdb = new HelperDataBase(getApplicationContext());
-        SQLiteDatabase db = hdb.getWritableDatabase();
+        DaoSession daoSession = ((App) getApplication()).getDaoSession();
+        ObjectTeamDao teamDao = daoSession.getObjectTeamDao();
 
         ObjectTeam team = new ObjectTeam();
 
         team.setName(team_name);
-        team.setCode(hdb.generateCode("T"));
-
-        String sql = team.insertTeam();
-
-        db.execSQL(sql);
-
-        db.close();
+        teamDao.insert(team);
     }
 
     public void fillTeams(){

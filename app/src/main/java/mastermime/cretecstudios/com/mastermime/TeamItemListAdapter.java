@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by vinicios-biluca on 03/10/17.
@@ -16,9 +17,9 @@ import java.util.ArrayList;
 public class TeamItemListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private ArrayList<TeamItemList> teams;
+    private List<TeamItemList> teams;
 
-    public TeamItemListAdapter(Context context, ArrayList<TeamItemList> teams) {
+    public TeamItemListAdapter(Context context, List<TeamItemList> teams) {
         //Itens que preencheram o listview
         this.teams = teams;
         //responsavel por pegar o Layout do item.
