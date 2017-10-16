@@ -14,7 +14,7 @@ public class ActivitySplash extends AppCompatActivity {
 
     //Tempo de Delay da Tela de Splash
     //int DELAY = 4035;
-    int DELAY = 1000;
+    int DELAY = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -18,9 +18,9 @@ import java.util.ArrayList;
 public class WordItemListAdapter extends BaseAdapter {
 
     private LayoutInflater mInflater;
-    private ArrayList<WordItemList> itens;
+    private ArrayList<ObjectWord> itens;
 
-    public WordItemListAdapter(Context context, ArrayList<WordItemList> itens)    {
+    public WordItemListAdapter(Context context, ArrayList<ObjectWord> itens)    {
         //Itens que preencheram o listview
         this.itens = itens;
         //responsavel por pegar o Layout do item.
@@ -45,7 +45,7 @@ public class WordItemListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
         //Pega o item de acordo com a posção.
-        WordItemList item = itens.get(position);
+        ObjectWord item = itens.get(position);
         //infla o team_itemlist para podermos preencher os dados
         view = mInflater.inflate(R.layout.words_itemlist, null);
 
@@ -56,9 +56,12 @@ public class WordItemListAdapter extends BaseAdapter {
         TextView category_text = (TextView) view.findViewById(R.id.itemlist_categorytext);
         ImageView image = (ImageView) view.findViewById(R.id.itemlist_image);
 
-        word_text.setText(item.getWordText());
-        category_text.setText(item.getCategoryText());
-        image.setImageResource(item.getImage());
+        word_text.setText(item.getWord());
+        category_text.setText(item.getCategory());
+
+        int aux = item.getImage();
+
+        image.setImageResource((item.getImage()));
 
         return view;
     }

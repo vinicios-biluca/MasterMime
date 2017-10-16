@@ -18,7 +18,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.greenrobot.greendao.query.Query;
+import org.greenrobot.greendao.query.WhereCondition;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityWords extends AppCompatActivity {
 
@@ -31,7 +35,7 @@ public class ActivityWords extends AppCompatActivity {
     AlertDialog delete_word_dialog;
 
     WordItemListAdapter adapterListView;
-    ArrayList<WordItemList> itens;
+    ArrayList<ObjectWord> itens;
 
 
     @Override
@@ -40,7 +44,19 @@ public class ActivityWords extends AppCompatActivity {
         setContentView(R.layout.activty_words);
 
         findMyViews();
+
         fillWordsList();
+
+    }
+
+    //Método para vincular as Views
+    public void findMyViews() {
+
+        words_list = (ListView) findViewById(R.id.words_list);
+        words_count = (TextView) findViewById(R.id.words_count);
+        search_text = (EditText) findViewById(R.id.words_search_text);
+
+        add_word = (Button) findViewById(R.id.bt_words_add);
 
         //Mosta o Diálogo para adicionar uma nova Palavra
         add_word.setOnClickListener(new View.OnClickListener() {
@@ -57,9 +73,9 @@ public class ActivityWords extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int index, long id) {
 
-                WordItemList item = itens.get(index);
+                ObjectWord item = itens.get(index);
 
-                showDeleteWordDialog(item.getId(), item.getWordText());
+                showDeleteWordDialog(item.getId(), item.getWord());
 
                 return false;
             }
@@ -81,7 +97,9 @@ public class ActivityWords extends AppCompatActivity {
                 String search_sequence = search_text.getText().toString().toUpperCase();
 
                 if (search_sequence.length() > 0) {
+
                     fillWordsList(search_sequence);
+
                 } else {
                     fillWordsList();
                 }
@@ -89,17 +107,6 @@ public class ActivityWords extends AppCompatActivity {
 
             }
         });
-
-    }
-
-    //Método para vincular as Views
-    public void findMyViews() {
-
-        words_list = (ListView) findViewById(R.id.words_list);
-        words_count = (TextView) findViewById(R.id.words_count);
-        search_text = (EditText) findViewById(R.id.words_search_text);
-
-        add_word = (Button) findViewById(R.id.bt_words_add);
 
 
     }
@@ -114,7 +121,6 @@ public class ActivityWords extends AppCompatActivity {
         final EditText word, tip;
 
         View dialog = li.inflate(R.layout.dialog_add_word, null);
-
 
         categorias = (Spinner) dialog.findViewById(R.id.add_word_categorias);
         cancel = (Button) dialog.findViewById(R.id.add_word_cancel);
@@ -148,6 +154,8 @@ public class ActivityWords extends AppCompatActivity {
 
                     insertWord(word_text, tip_text, category_text);
 
+                    word.setText("");
+
                     add_word_dialog.dismiss();
 
                 }
@@ -166,9 +174,9 @@ public class ActivityWords extends AppCompatActivity {
     }
 
     //Diálogo para deletar uma palavra
-    public void showDeleteWordDialog(int id, String word) {
+    public void showDeleteWordDialog(Long id, String word) {
 
-        final int cod_id = id;
+        final Long cod_id = id;
 
         LayoutInflater li = getLayoutInflater();
 
@@ -237,13 +245,14 @@ public class ActivityWords extends AppCompatActivity {
     //Método que insere uma palavra na Base de Dados
     public void insertWord(String word, String tip, String category) {
 
+        DaoSession daoSession = ((AppORM) getApplication()).getDaoSession();
+
         ObjectWord word_object = new ObjectWord();
 
-        word_object.setWord(word);
+        word_object.setWord(word.toUpperCase());
         word_object.setTip(tip);
         word_object.setCategory(category);
 
-        DaoSession daoSession = ((App) getApplication()).getDaoSession();
         daoSession.getObjectWordDao().insert(word_object);
 
         fillWordsList();
@@ -254,12 +263,15 @@ public class ActivityWords extends AppCompatActivity {
     }
 
     //Método que deleta uma palavra na Base de Dados
-    public void deleteWord(long id) {
+    public void deleteWord(Long id) {
 
-        DaoSession daoSession = ((App) getApplication()).getDaoSession();
-        ObjectWordDao wordDao = daoSession.getObjectWordDao();
+        DaoSession daoSession = ((AppORM) getApplication()).getDaoSession();
 
-        wordDao.deleteByKey(id);
+        ObjectWord word_object = new ObjectWord();
+
+        word_object.setId(id);
+
+        daoSession.getObjectWordDao().delete(word_object);
 
         fillWordsList();
 
@@ -270,145 +282,93 @@ public class ActivityWords extends AppCompatActivity {
     //Preenche a lista de Categorias salvas no banco
     public void fillCategorias(Spinner categorias) {
 
-        HelperDataBase hdb = new HelperDataBase(getApplicationContext());
-        SQLiteDatabase db = hdb.getWritableDatabase();
+        ObjectWord word = new ObjectWord();
 
-        Cursor c = db.query(true, "word", new String[]{"category"}, null, null, null, null, "category", "10");
-
-        ArrayList<String> categories = new ArrayList<String>();
-
-        if (c.getCount() > 0) {
-
-            while (c.moveToNext()) {
-
-                categories.add(c.getString(0));
-
-            }
-
-        }
+        ArrayList<String> categories = word.getCategories();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.words_category_item, categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorias.setAdapter(adapter);
 
-        db.close();
 
     }
 
     //Preenche a lista de palavras com todas as palavras salvas no banco
     public void fillWordsList() {
 
-        itens = new ArrayList<WordItemList>();
+        itens = new ArrayList<ObjectWord>();
 
-        HelperDataBase hdb = new HelperDataBase(getApplicationContext());
-        SQLiteDatabase db = hdb.getWritableDatabase();
+        DaoSession daoSession = ((AppORM) getApplication()).getDaoSession();
 
-        Cursor c = db.query("word", new String[]{"word", "category", "id"}, null, null, null, null, "word");
+        List<ObjectWord> words = daoSession.getObjectWordDao().loadAll();
 
-        if (c.getCount() > 0) {
+        for (ObjectWord w : words) {
 
-            words_count.setText(String.valueOf(c.getCount()) + " palavras encontradas");
+            Long id = w.getId();
+            String word = w.getWord();
+            String tip = w.getTip();
+            String category = w.getCategory();
+            String status = w.getStatus();
+            int image = w.getImage();
 
-            while (c.moveToNext()) {
+            ObjectWord aux = new ObjectWord(id, word, tip, category, status);
+            aux.setImage(image);
 
-                int icon = getCategoryIcon(c.getString(1));
+            itens.add(aux);
 
-                WordItemList item = new WordItemList(icon, c.getString(0), c.getString(1), c.getInt(2));
-
-                itens.add(item);
-
-            }
-
-        } else {
-
-            words_count.setText("Nenhuma palavra encontrada");
 
         }
 
-        adapterListView = new WordItemListAdapter(this, itens);
+        if (itens.size() > 0) {
+            words_count.setText(itens.size() + " palavras encontradas");
+        } else {
+            words_count.setText("0 palavras encontradas");
+        }
 
+        adapterListView = new WordItemListAdapter(this, itens);
         words_list.setAdapter(adapterListView);
 
 
-        db.close();
-
     }
 
-    //Preenche a lista de palavras conforme uma String de Filtro
+    //Preenche a lista de palavras a partir do filtro
     public void fillWordsList(String search_text) {
 
-        itens = new ArrayList<WordItemList>();
+        itens = new ArrayList<ObjectWord>();
 
-        HelperDataBase hdb = new HelperDataBase(getApplicationContext());
-        SQLiteDatabase db = hdb.getWritableDatabase();
+        DaoSession daoSession = ((AppORM) getApplication()).getDaoSession();
 
-        Cursor c = db.query("word", new String[]{"word", "category", "id"}, "word like ?", new String[]{"%" + search_text + "%"}, null, null, "word");
+        Query<ObjectWord> query = daoSession.getObjectWordDao().queryRawCreate("WHERE WORD like ?", "%" + search_text.toUpperCase() + "%");
+        List<ObjectWord> words = query.list();
 
-        if (c.getCount() > 0) {
+        for (ObjectWord w : words) {
 
-            words_count.setText(String.valueOf(c.getCount()) + " palavras encontradas");
+            Long id = w.getId();
+            String word = w.getWord();
+            String tip = w.getTip();
+            String category = w.getCategory();
+            String status = w.getStatus();
+            int image = w.getImage();
 
-            while (c.moveToNext()) {
+            ObjectWord aux = new ObjectWord(id, word, tip, category, status);
+            aux.setImage(image);
 
-                int icon = getCategoryIcon(c.getString(1));
+            itens.add(aux);
 
-                WordItemList item = new WordItemList(icon, c.getString(0), c.getString(1), c.getInt(2));
 
-                itens.add(item);
+        }
 
-            }
-
+        if (itens.size() > 0) {
+            words_count.setText(itens.size() + " palavras encontradas");
         } else {
-
-            words_count.setText("Nenhuma palavra encontrada");
-
+            words_count.setText("0 palavras encontradas");
         }
 
         adapterListView = new WordItemListAdapter(this, itens);
-
         words_list.setAdapter(adapterListView);
 
 
-        db.close();
-
     }
 
-    //Método que retorna o ícone adequado conforme a Categoria
-    public int getCategoryIcon(String category) {
 
-        if (category.equals("ACTION")) {
-            return R.drawable.actions_icon;
-        }
-
-        if (category.equals("ANIMALS")) {
-            return R.drawable.animals_icon;
-        }
-
-        if (category.equals("FAMOUS")) {
-            return R.drawable.famous_icon;
-        }
-
-        if (category.equals("FOODS")) {
-            return R.drawable.food_icon;
-        }
-
-        if (category.equals("MIX")) {
-            return R.drawable.mix_icon;
-        }
-
-        if (category.equals("MOVIES")) {
-            return R.drawable.movies_icon;
-        }
-
-        if (category.equals("OBJECT")) {
-            return R.drawable.objects_icon;
-        }
-
-        if (category.equals("PLACES")) {
-            return R.drawable.places_icon;
-        }
-
-        return R.drawable.info_icon;
-
-    }
 }
