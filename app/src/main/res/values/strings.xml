@@ -8,5 +8,7 @@
     <string name="title_activity_timer">Palavras</string>
     <string name="title_activity_team">Palavras</string>
     <string name="title_activity_infw">Palavras</string>
+    <string name="title_activity_new_match">ActivityNewMatch</string>
+    <string name="title_activity_play_room">ActivityPlayRoom</string>
 
 </resources>

@@ -39,9 +39,14 @@
             android:name=".ActivityTimer"
             android:label="@string/title_activity_timer"
             android:theme="@style/AppTheme.NoActionBar" />
-
-
-
+        <activity
+            android:name=".ActivityNewMatch"
+            android:label="@string/title_activity_new_match"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ActivityPlayRoom"
+            android:label="@string/title_activity_play_room"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

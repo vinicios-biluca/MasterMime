@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.List;
 
 public class ActivityMain extends AppCompatActivity {
 
@@ -25,8 +26,29 @@ public class ActivityMain extends AppCompatActivity {
 
         findMyViews();
 
-        //TODO FAZER O TESTE PARA APENAS CARREGAS SE NÃO HOUVEREM PALAVRAS SALVAS!!
-        loadSet();
+        if (isEmpty()) {
+
+            loadSet();
+
+        }
+
+
+    }
+
+    public void findMyViews() {
+
+        //Fonte customizada
+        Typeface myFont = Typeface.createFromAsset(getAssets(), "myfont.otf");
+
+        play = (Button) findViewById(R.id.bt_main_play);
+        play.setTypeface(myFont);
+        words = (Button) findViewById(R.id.bt_main_words);
+        words.setTypeface(myFont);
+        info = (Button) findViewById(R.id.bt_main_info);
+        info.setTypeface(myFont);
+        quit = (Button) findViewById(R.id.bt_main_quit);
+        quit.setTypeface(myFont);
+
 
         play.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,29 +85,11 @@ public class ActivityMain extends AppCompatActivity {
 
             }
         });
-
-
-    }
-
-    public void findMyViews() {
-
-        //Fonte customizada
-        Typeface myFont = Typeface.createFromAsset(getAssets(), "myfont.otf");
-
-        play = (Button) findViewById(R.id.bt_main_play);
-        play.setTypeface(myFont);
-        words = (Button) findViewById(R.id.bt_main_words);
-        words.setTypeface(myFont);
-        info = (Button) findViewById(R.id.bt_main_info);
-        info.setTypeface(myFont);
-        quit = (Button) findViewById(R.id.bt_main_quit);
-        quit.setTypeface(myFont);
-
     }
 
     public void showGameActivity() {
 
-        Intent i = new Intent(ActivityMain.this, ActivityTimer.class);
+        Intent i = new Intent(ActivityMain.this, ActivityNewMatch.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(i);
 
@@ -116,11 +120,25 @@ public class ActivityMain extends AppCompatActivity {
 
     }
 
+    public boolean isEmpty() {
+
+        DaoSession daoSession = ((AppORM) getApplication()).getDaoSession();
+
+        List<ObjectWord> words = daoSession.getObjectWordDao().loadAll();
+
+        if (words.size() > 0) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     public void loadSet() {
 
         DaoSession daoSession = ((AppORM) getApplication()).getDaoSession();
 
-        daoSession.getObjectWordDao().deleteAll();
+        //daoSession.getObjectWordDao().deleteAll();
 
         if (daoSession.getObjectWordDao().loadAll().size() < 1) {
 
