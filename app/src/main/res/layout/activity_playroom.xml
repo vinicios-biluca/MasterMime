@@ -14,7 +14,162 @@
         android:padding="15dp">
 
 
+        <TextView
+            android:id="@+id/txt_turno"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Turno X"
+            android:theme="@style/MyLabel" />
 
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_name_equipe1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Equipe 1"
+                    android:textSize="20dp"
+                    android:theme="@style/MyLabel" />
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="30dp"
+                    android:theme="@style/MyLabel" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    >
+
+                    <Button
+                        android:id="@+id/bt_woarads_add"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:textSize="50dp"
+                        android:theme="@style/MyButton" />
+
+                    <Button
+                        android:id="@+id/bt_worads_ad"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:textSize="50dp"
+                        android:theme="@style/MyButton" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#fff"
+                android:orientation="horizontal"></LinearLayout>
+
+            <LinearLayout
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txt_name_equipe2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Equipe 2"
+                    android:textSize="20dp"
+                    android:theme="@style/MyLabel" />
+
+                <TextView
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="0"
+                    android:textAlignment="center"
+                    android:textSize="30dp"
+                    android:theme="@style/MyLabel" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal"
+                    >
+
+                    <Button
+                        android:id="@+id/bt_woa1rads_add"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:textSize="50dp"
+                        android:theme="@style/MyButton" />
+
+                    <Button
+                        android:id="@+id/bt_wora2ds_ad"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:textSize="50dp"
+                        android:theme="@style/MyButton" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="É a vez de:"
+            android:theme="@style/MyLabel" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Equipe X"
+            android:theme="@style/MyLabel" />
+
+        <Button
+            android:id="@+id/bt_worads_aaad"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/circle_background"
+            android:textSize="50dp" />
 
     </LinearLayout>
 

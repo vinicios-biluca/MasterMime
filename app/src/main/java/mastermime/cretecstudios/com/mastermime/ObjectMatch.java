@@ -16,6 +16,9 @@ public class ObjectMatch {
     Long id;
 
     @Property
+    double turn;
+
+    @Property
     double time;
 
     @Property
@@ -33,10 +36,11 @@ public class ObjectMatch {
     @Property
     String team2;
 
-    @Generated(hash = 294618582)
-    public ObjectMatch(Long id, double time, double turns, double pts_team1,
-            double pts_team2, String team1, String team2) {
+    @Generated(hash = 335681485)
+    public ObjectMatch(Long id, double turn, double time, double turns,
+            double pts_team1, double pts_team2, String team1, String team2) {
         this.id = id;
+        this.turn = turn;
         this.time = time;
         this.turns = turns;
         this.pts_team1 = pts_team1;
@@ -55,6 +59,14 @@ public class ObjectMatch {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public double getTurn() {
+        return this.turn;
+    }
+
+    public void setTurn(double turn) {
+        this.turn = turn;
     }
 
     public double getTime() {
@@ -104,5 +116,6 @@ public class ObjectMatch {
     public void setTeam2(String team2) {
         this.team2 = team2;
     }
+
 
 }

@@ -1,5 +1,6 @@
 package mastermime.cretecstudios.com.mastermime;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -30,7 +31,7 @@ public class ActivityNewMatch extends AppCompatActivity {
 
     }
 
-    public void insertMatch() {
+    public Long insertMatch() {
 
         double tu = 5.0 + (2 * turn.getProgress());
         double ti = 60.0 + (30 * time.getProgress());
@@ -43,13 +44,19 @@ public class ActivityNewMatch extends AppCompatActivity {
         match.setTime(ti);
         match.setTeam1(team1);
         match.setTeam2(team2);
+        match.setTurn(1.0);
 
         DaoSession daoSession = ((AppORM) getApplication()).getDaoSession();
 
-        daoSession.getObjectMatchDao().insert(match);
+        daoSession.getObjectMatchDao().deleteAll();
+
+        //TODO DANDO PAU NO INSERT FUCK!
+        Long id = daoSession.getObjectMatchDao().insert(match);
 
         Toast toast = Toast.makeText(getApplicationContext(), "Partida Salva!", Toast.LENGTH_SHORT);
         toast.show();
+
+        return id;
 
     }
 
@@ -73,7 +80,9 @@ public class ActivityNewMatch extends AppCompatActivity {
 
                 if (testaValores()) {
 
-                    insertMatch();
+
+
+                    showActivityPlayRoom(insertMatch());
 
                 }
 
@@ -129,6 +138,19 @@ public class ActivityNewMatch extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    //Abre a Tela de Informações
+    public void showActivityPlayRoom(Long id) {
+
+        Intent i = new Intent(ActivityNewMatch.this, ActivityPlayRoom.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        Bundle extras = new Bundle();
+        extras.putLong("MATCH_ID", id);
+
+        i.putExtras(extras);
+        startActivity(i);
 
     }
 
