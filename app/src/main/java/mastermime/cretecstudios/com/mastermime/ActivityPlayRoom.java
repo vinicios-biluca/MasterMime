@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class ActivityPlayRoom extends AppCompatActivity {
 
-    TextView name1, name2, turn;
+    TextView name1, name2, turn, points1, points2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,23 +29,26 @@ public class ActivityPlayRoom extends AppCompatActivity {
 
         name1.setText(match.getTeam1());
         name2.setText(match.getTeam2());
-        turn.setText(String.valueOf(match.getTurn()));
+        turn.setText("Turno " + String.valueOf((int) match.getTurn()));
+        points1.setText(String.valueOf((int) match.getPts_team1()));
+        points2.setText(String.valueOf((int) match.getPts_team2()));
     }
 
-    public void findMyViews(){
+    public void findMyViews() {
 
         name1 = (TextView) findViewById(R.id.txt_name_equipe1);
         name2 = (TextView) findViewById(R.id.txt_name_equipe2);
         turn = (TextView) findViewById(R.id.txt_turno);
+        points1 = (TextView) findViewById(R.id.txt_points_equipe1);
+        points2 = (TextView) findViewById(R.id.txt_points_equipe2);
 
 
     }
 
 
-    public ObjectMatch getObjectMatch(Long id){
+    public ObjectMatch getObjectMatch(Long id) {
 
         DaoSession daoSession = ((AppORM) getApplication()).getDaoSession();
-
         return daoSession.getObjectMatchDao().load(id);
 
     }

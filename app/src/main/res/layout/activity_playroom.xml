@@ -55,6 +55,7 @@
                     android:theme="@style/MyLabel" />
 
                 <TextView
+                    android:id="@+id/txt_points_equipe1"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -74,14 +75,16 @@
                         android:id="@+id/bt_woarads_add"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:textSize="50dp"
+                        android:textSize="20dp"
+                        android:text="-"
                         android:theme="@style/MyButton" />
 
                     <Button
                         android:id="@+id/bt_worads_ad"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:textSize="50dp"
+                        android:textSize="20dp"
+                        android:text="+"
                         android:theme="@style/MyButton" />
 
                 </LinearLayout>
@@ -112,6 +115,7 @@
                     android:theme="@style/MyLabel" />
 
                 <TextView
+                    android:id="@+id/txt_points_equipe2"
                     android:layout_width="60dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -131,14 +135,16 @@
                         android:id="@+id/bt_woa1rads_add"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:textSize="50dp"
+                        android:textSize="20dp"
+                        android:text="-"
                         android:theme="@style/MyButton" />
 
                     <Button
                         android:id="@+id/bt_wora2ds_ad"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:textSize="50dp"
+                        android:textSize="20dp"
+                        android:text="+"
                         android:theme="@style/MyButton" />
 
                 </LinearLayout>
@@ -153,12 +159,14 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:text="É a vez de:"
+            android:textSize="25dp"
             android:theme="@style/MyLabel" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:textSize="25dp"
             android:text="Equipe X"
             android:theme="@style/MyLabel" />
 

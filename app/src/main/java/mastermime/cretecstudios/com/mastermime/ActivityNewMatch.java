@@ -50,7 +50,6 @@ public class ActivityNewMatch extends AppCompatActivity {
 
         daoSession.getObjectMatchDao().deleteAll();
 
-        //TODO DANDO PAU NO INSERT FUCK!
         Long id = daoSession.getObjectMatchDao().insert(match);
 
         Toast toast = Toast.makeText(getApplicationContext(), "Partida Salva!", Toast.LENGTH_SHORT);
