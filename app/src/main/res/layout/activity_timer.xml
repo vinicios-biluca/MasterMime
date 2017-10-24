@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context="mastermime.cretecstudios.com.mastermime.ActivitySplash">
 
-
     <LinearLayout
         android:id="@+id/lin_splash"
         android:layout_width="match_parent"
@@ -14,7 +13,6 @@
         android:background="@drawable/main_background"
         android:gravity="center"
         android:orientation="vertical">
-
 
         <ImageView
             android:id="@+id/timer_icon"
@@ -44,8 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:gravity="center"
             android:background="@drawable/circle_background"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView

@@ -7,11 +7,13 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ActivityPlayRoom extends AppCompatActivity {
 
     TextView name1, name2, turn, points1, points2;
+    Button play;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,23 @@ public class ActivityPlayRoom extends AppCompatActivity {
         points1 = (TextView) findViewById(R.id.txt_points_equipe1);
         points2 = (TextView) findViewById(R.id.txt_points_equipe2);
 
+        play = (Button) findViewById(R.id.bt_play_room);
+
+        play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGuessRoom();
+            }
+        });
+
+
+    }
+
+    public void startGuessRoom(){
+
+        Intent i = new Intent(ActivityPlayRoom.this, ActivityTimer.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(i);
 
     }
 
