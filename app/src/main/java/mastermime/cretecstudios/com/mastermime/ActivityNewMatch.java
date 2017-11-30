@@ -33,14 +33,13 @@ public class ActivityNewMatch extends AppCompatActivity {
 
     public Long insertMatch() {
 
-        double tu = 5.0 + (2 * turn.getProgress());
         double ti = 60.0 + (30 * time.getProgress());
 
         String team1 = equipe1.getText().toString();
         String team2 = equipe2.getText().toString();
 
         ObjectMatch match = new ObjectMatch();
-        match.setTurns(tu);
+        match.setTurns(99);
         match.setTime(ti);
         match.setTeam1(team1);
         match.setTeam2(team2);
@@ -67,10 +66,8 @@ public class ActivityNewMatch extends AppCompatActivity {
         equipe1 = (EditText) findViewById(R.id.edt_equipe1);
         equipe2 = (EditText) findViewById(R.id.edt_equipe2);
 
-        turns = (TextView) findViewById(R.id.txt_turnos);
         times = (TextView) findViewById(R.id.txt_time);
 
-        turn = (SeekBar) findViewById(R.id.sb_turns);
         time = (SeekBar) findViewById(R.id.sb_time);
 
         ok.setOnClickListener(new View.OnClickListener() {
@@ -78,7 +75,6 @@ public class ActivityNewMatch extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (testaValores()) {
-
 
 
                     showActivityPlayRoom(insertMatch());
@@ -92,27 +88,6 @@ public class ActivityNewMatch extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-
-        turn.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-                int turn_count = 5 + (2 * progress);
-
-                turns.setText("Turnos: " + turn_count);
-
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
             }
         });
 

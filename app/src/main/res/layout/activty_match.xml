@@ -21,22 +21,6 @@
             android:theme="@style/MyLabel" />
 
         <TextView
-            android:id="@+id/txt_turnos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Turnos: 7"
-            android:textSize="25dp"
-            android:theme="@style/MyLabel" />
-
-        <SeekBar
-            android:id="@+id/sb_turns"
-            style="@style/Widget.AppCompat.SeekBar.Discrete"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:max="3"
-            android:progress="1" />
-
-        <TextView
             android:id="@+id/txt_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

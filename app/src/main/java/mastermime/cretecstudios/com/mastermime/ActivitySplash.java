@@ -12,10 +12,10 @@ import android.widget.LinearLayout;
 
 public class ActivitySplash extends AppCompatActivity {
 
-    //TODO
+
     //Tempo de Delay da Tela de Splash
-    //int DELAY = 4035;
-    int DELAY = 10;
+    int DELAY = 4035;
+    //int DELAY = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,10 +23,10 @@ public class ActivitySplash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
 
-        //TODO
+
         //Toca a Intro Sound
         MediaPlayer intro = MediaPlayer.create(ActivitySplash.this, R.raw.intro_sound);
-       ///////////////// intro.start();
+       intro.start();
 
         StartAnimations();
 

@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import org.greenrobot.greendao.query.Query;
+
 import java.io.File;
 import java.util.List;
 
@@ -31,6 +33,9 @@ public class ActivityMain extends AppCompatActivity {
             loadSet();
 
         }
+
+
+        blockTest();
 
 
     }
@@ -770,5 +775,33 @@ public class ActivityMain extends AppCompatActivity {
 
 
     }
+
+    public void blockTest() {
+
+        DaoSession daoSession = ((AppORM) getApplication()).getDaoSession();
+        List<ObjectWord> words = daoSession.getObjectWordDao().loadAll();
+
+        Query<ObjectWord> query = daoSession.getObjectWordDao().queryRawCreate("WHERE STATUS like ?", "BLOCK");
+        List<ObjectWord> block_words = query.list();
+
+        int words_size = words.size();
+        int block_size = block_words.size();
+
+        if ((block_size / words_size) > 0.800) {
+
+            for(int i = 0; i < words_size; i++){
+
+                words.get(i).setStatus("FREE");
+                daoSession.update(words.get(i));
+
+            }
+
+            Toast toast = Toast.makeText(getApplicationContext(), "Palavras Renovadas!", Toast.LENGTH_LONG);
+            toast.show();
+
+        }
+
+    }
+
 
 }

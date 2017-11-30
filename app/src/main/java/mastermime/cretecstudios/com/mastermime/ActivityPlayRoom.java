@@ -13,7 +13,11 @@ import android.widget.TextView;
 public class ActivityPlayRoom extends AppCompatActivity {
 
     TextView name1, name2, turn, points1, points2;
-    Button play;
+    Button play, minus1, plus1, minus2, plus2;
+
+    double time, turns;
+
+    int pts1, pts2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +35,15 @@ public class ActivityPlayRoom extends AppCompatActivity {
 
         name1.setText(match.getTeam1());
         name2.setText(match.getTeam2());
-        turn.setText("Turno " + String.valueOf((int) match.getTurn()));
+
+        turn.setText("Play Room");
+
         points1.setText(String.valueOf((int) match.getPts_team1()));
         points2.setText(String.valueOf((int) match.getPts_team2()));
+
+        time = match.getTime();
+        turns = match.getTurns();
+
     }
 
     public void findMyViews() {
@@ -46,6 +56,11 @@ public class ActivityPlayRoom extends AppCompatActivity {
 
         play = (Button) findViewById(R.id.bt_play_room);
 
+        minus1 = (Button) findViewById(R.id.bt_equipe1_minus);
+        plus1 = (Button) findViewById(R.id.bt_equipe1_plus);
+        minus2 = (Button) findViewById(R.id.bt_equipe2_minus);
+        plus2 = (Button) findViewById(R.id.bt_equipe2_plus);
+
         play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,13 +68,70 @@ public class ActivityPlayRoom extends AppCompatActivity {
             }
         });
 
+        minus1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (pts1 > 0) {
+                    pts1--;
+                }
+
+                setPts1(pts1);
+
+            }
+        });
+
+        plus1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (pts1 < 99) {
+                    pts1++;
+                }
+
+                setPts1(pts1);
+
+            }
+        });
+
+        minus2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (pts2 > 0) {
+                    pts2--;
+                }
+
+                setPts2(pts2);
+
+            }
+        });
+
+        plus2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (pts2 < 99) {
+                    pts2++;
+                }
+
+                setPts2(pts2);
+
+            }
+        });
+
 
     }
 
-    public void startGuessRoom(){
+    public void startGuessRoom() {
 
         Intent i = new Intent(ActivityPlayRoom.this, ActivityTimer.class);
         i.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
+        Bundle extras = new Bundle();
+        extras.putDouble("TIME", this.time);
+
+        i.putExtras(extras);
         startActivity(i);
 
     }
@@ -69,6 +141,18 @@ public class ActivityPlayRoom extends AppCompatActivity {
 
         DaoSession daoSession = ((AppORM) getApplication()).getDaoSession();
         return daoSession.getObjectMatchDao().load(id);
+
+    }
+
+    public void setPts1(int pt) {
+
+        this.points1.setText("" + pt);
+
+    }
+
+    public void setPts2(int pt) {
+
+        this.points2.setText("" + pt);
 
     }
 }

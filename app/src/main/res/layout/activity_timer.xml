@@ -77,17 +77,10 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/butto1n"
-                android:layout_width="100dp"
+                android:id="@+id/bt_acertei"
+                android:layout_width="150dp"
                 android:layout_height="100dp"
-                android:text="A"
-                android:theme="@style/MyButton" />
-
-            <Button
-                android:id="@+id/but1ton"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:text="B"
+                android:text="Voltar"
                 android:theme="@style/MyButton" />
 
         </LinearLayout>
